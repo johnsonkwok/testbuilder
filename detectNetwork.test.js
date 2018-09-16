@@ -154,6 +154,24 @@ describe('Discover', function() {
   it('has a prefix of 65 and a length of 19', function() {
     assert(detectNetwork('6511123456789012345') === 'Discover');
   });
+  it('has a prefix of 644 and a length of 16', function() {
+    assert(detectNetwork('6441123456789012') === 'Discover');
+  });
+  it('has a prefix of 644 and a length of 19', function() {
+    assert(detectNetwork('6441123456789012345') === 'Discover');
+  });
+  it('has a prefix of 647 and a length of 16', function() {
+    assert(detectNetwork('6471123456789012') === 'Discover');
+  });
+  it('has a prefix of 647 and a length of 19', function() {
+    assert(detectNetwork('6471123456789012345') === 'Discover');
+  });
+  it('has a prefix of 649 and a length of 16', function() {
+    assert(detectNetwork('6491123456789012') === 'Discover');
+  });
+  it('has a prefix of 649 and a length of 19', function() {
+    assert(detectNetwork('6491123456789012345') === 'Discover');
+  });
 });
 
 describe('Maestro', function() {
