@@ -6,7 +6,7 @@
 // You don't actually want to fill *this* value in on line 9, but you'll see
 // other places in this file where you'll replace the FILL_ME_IN with a
 // different value.
-var FILL_ME_IN = 'Fill this value in';
+// var FILL_ME_IN = 'Fill this value in';
 
 /*
 describe('Introduction to Mocha Tests - READ ME FIRST', function() {
@@ -176,6 +176,31 @@ describe('Discover', function() {
 
 describe('Maestro', function() {
   // Write full test coverage for the Maestro card
+  var expect = chai.expect;
+  it('has a prefix of 5018 and a length of 12', function() {
+    expect(detectNetwork('501812345678')).to.equal('Maestro');
+  });
+  it('has a prefix of 5018 and a length of 13', function() {
+    expect(detectNetwork('5018123456789')).to.equal('Maestro');
+  });
+  it('has a prefix of 5018 and a length of 14', function() {
+    expect(detectNetwork('50181234567890')).to.equal('Maestro');
+  });
+  it('has a prefix of 5018 and a length of 15', function() {
+    expect(detectNetwork('501812345678901')).to.equal('Maestro');
+  });
+  it('has a prefix of 5020 and a length of 16', function() {
+    expect(detectNetwork('5020123456789012')).to.equal('Maestro');
+  });
+  it('has a prefix of 5020 and a length of 17', function() {
+    expect(detectNetwork('50201234567890123')).to.equal('Maestro');
+  });
+  it('has a prefix of 5020 and a length of 18', function() {
+    expect(detectNetwork('502012345678901234')).to.equal('Maestro');
+  });
+  it('has a prefix of 5020 and a length of 19', function() {
+    expect(detectNetwork('5020123456789012345')).to.equal('Maestro');
+  });
 });
 
 describe('should support China UnionPay')
