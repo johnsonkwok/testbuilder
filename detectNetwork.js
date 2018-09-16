@@ -55,7 +55,7 @@ function isDiscover(pf2, pf3, pf4, length) {
 }
 
 function isMaestro(pf4, length) {
-	if (pf4 === 5018 || pf4 === 5020 || pf4 === 5038 || pf === 6304) {
+	if (pf4 === 5018 || pf4 === 5020 || pf4 === 5038 || pf4 === 6304) {
 		if (length >= 12 && length <= 19) {
 			return true;
 		}
