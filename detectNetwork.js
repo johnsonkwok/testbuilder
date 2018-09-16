@@ -11,12 +11,11 @@ var detectNetwork = function(cardNumber) {
   // Note: `cardNumber` will always be a string
   // The Diner's Club network always starts with a 38 or 39 and is 14 digits long
   // The American Express network always starts with a 34 or 37 and is 15 digits long
-  // Once you've read this, go ahead and try to implement this function, then return to the console.
-
+ 
   // My outline
   // input: a credit card number as a STRING
   // output: name of the network as a string
-  // assumptions: the card number given will always be a string; we only have two networks in this scenario
+  // assumptions: the card number given will always be a string
   // create an output variable (network) that is a string set to 'Invalid Number'
   // create length variable for length of cardNumber
   // get the prefix of the card number as a string
@@ -25,19 +24,31 @@ var detectNetwork = function(cardNumber) {
  	// return network variable
 
  	let network = 'Invalid Number';
- 	const prefix = parseInt(cardNumber.slice(0, 2));
- 	const prefix1 = parseInt(cardNumber.charAt(0));
+	const prefix1 = parseInt(cardNumber.charAt(0)); 
+	const prefix2 = parseInt(cardNumber.slice(0, 2));
+	const prefix3 = parseInt(cardNumber.slice(0, 3));
+	const prefix4 = parseInt(cardNumber.slice(0, 4));
  	const length = cardNumber.length;
- 	if ((prefix === 38 || prefix === 39) && length === 14) {
+ 	if ((prefix2 === 38 || prefix2 === 39) && length === 14) {
  		network = `Diner's Club`;
- 	} else if ((prefix === 34 || prefix === 37) && length === 15) {
+ 	} else if ((prefix2 === 34 || prefix2 === 37) && length === 15) {
  		network = 'American Express';
- 	} else if (prefix >= 51 && prefix <= 55 && length === 16) {
+ 	} else if (prefix2 >= 51 && prefix2 <= 55 && length === 16) {
  		network = 'MasterCard';
  	} else if (prefix1 === 4 && (length === 13 || length === 16 || length === 19)) {
  		network = 'Visa';
- 	}
+ 	} else if (isDiscover(prefix2, prefix3, prefix4, length)) {
+		network = 'Discover';
+	}
  	return network;
 };
 
+function isDiscover(pf2, pf3, pf4, length) {
+	if (pf2 === 65 || (pf3 >= 644 && pf3 <= 649) || pf4 === 6011) {
+		if (length === 16 || length === 19) {
+			return true;
+		}
+	}
+	return false;
+}
 
