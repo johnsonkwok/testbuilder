@@ -18,17 +18,24 @@ var detectNetwork = function(cardNumber) {
   // output: name of the network as a string
   // assumptions: the card number given will always be a string; we only have two networks in this scenario
   // create an output variable (network) that is a string set to 'Invalid Number'
+  // create length variable for length of cardNumber
   // get the prefix of the card number as a string
   // if the prefixes and card number length match the format of a specific network
   	// set output variable (network) to the appropriate network
  	// return network variable
 
  	let network = 'Invalid Number';
- 	const prefix = cardNumber.slice(0, 2);
- 	if ((prefix === '38' || prefix === '39') && cardNumber.length === 14) {
+ 	const prefix = parseInt(cardNumber.slice(0, 2));
+ 	const prefix1 = parseInt(cardNumber.charAt(0));
+ 	const length = cardNumber.length;
+ 	if ((prefix === 38 || prefix === 39) && length === 14) {
  		network = `Diner's Club`;
- 	} else if ((prefix === '34' || prefix === '37') && cardNumber.length === 15) {
+ 	} else if ((prefix === 34 || prefix === 37) && length === 15) {
  		network = 'American Express';
+ 	} else if (prefix >= 51 && prefix <= 55 && length === 16) {
+ 		network = 'Mastercard';
+ 	} else if (prefix1 === 4 && (length === 13 || length === 16 || length === 19)) {
+ 		network = 'Visa';
  	}
  	return network;
 };
