@@ -23,6 +23,14 @@ var detectNetwork = function(cardNumber) {
   	// set output variable (network) to the appropriate network
  	// return network variable
 
+ 	let network = 'Invalid Number';
+ 	const prefix = cardNumber.slice(0, 2);
+ 	if ((prefix === '38' || prefix === '39') && cardNumber.length === 14) {
+ 		network = `Diner's Club`;
+ 	} else if ((prefix === '34' || prefix === '37') && cardNumber.length === 15) {
+ 		network = 'American Express';
+ 	}
+ 	return network;
 };
 
 
