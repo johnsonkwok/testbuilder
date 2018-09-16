@@ -33,7 +33,7 @@ var detectNetwork = function(cardNumber) {
  	} else if ((prefix === 34 || prefix === 37) && length === 15) {
  		network = 'American Express';
  	} else if (prefix >= 51 && prefix <= 55 && length === 16) {
- 		network = 'Mastercard';
+ 		network = 'MasterCard';
  	} else if (prefix1 === 4 && (length === 13 || length === 16 || length === 19)) {
  		network = 'Visa';
  	}
