@@ -23,6 +23,8 @@ var detectNetwork = function(cardNumber) {
  	const length = cardNumber.length;
 	if (isChinaUnionPay(prefix3, prefix4, prefix6, length)) {
 		network = 'China UnionPay';
+	} else if (isSwitch(prefix4, prefix6, length)) {
+		network = 'Switch';
 	} else if (isMaestro(prefix4, length)) {
 		network = 'Maestro';
 	} else if (isDiscover(prefix2, prefix3, prefix4, length)) {
@@ -46,6 +48,12 @@ function isChinaUnionPay(pf3, pf4, pf6, length) {
 		}
 	}
 	return false;
+}
+
+function isSwitch(pf4, pf6, length) {
+	const prefixes = [4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759];
+	const lengths = [16, 18, 19];
+	return ((prefixes.includes(pf4) || prefixes.includes(pf6)) && lengths.includes(length));
 }
 
 function isMaestro(pf4, length) {
