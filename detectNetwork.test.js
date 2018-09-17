@@ -87,18 +87,23 @@ describe('MasterCard', function() {
 
 describe('Discover', function() {
   var assert = chai.assert;
+
   it('has a prefix of 6011 and a length of 16', function() {
     assert(detectNetwork('6011123456789012') === 'Discover');
   });
+
   it('has a prefix of 6011 and a length of 19', function() {
     assert(detectNetwork('6011123456789012345') === 'Discover');
   });
+
   it('has a prefix of 65 and a length of 16', function() {
     assert(detectNetwork('6511123456789012') === 'Discover');
   });
+
   it('has a prefix of 65 and a length of 19', function() {
     assert(detectNetwork('6511123456789012345') === 'Discover');
   });
+
   for (var prefix = 644; prefix <= 649; prefix++) {
     (function(prefix) {
       it(`has a prefix of ${prefix} and a length of 16`, function() {
@@ -116,6 +121,7 @@ describe('Discover', function() {
 describe('Maestro', function() {
   let should = chai.should;
   const prefixes = ['5018', '5020', '5038', '6304'];
+
   for (let length = 12; length <= 19; length++) {
     prefixes.forEach((prefix) => {
       (function(prefix) {
@@ -128,5 +134,35 @@ describe('Maestro', function() {
   }
 });
 
-describe('should support China UnionPay')
+describe('China UnionPay', function() {
+  let should = chai.should;
+  
+  for (let prefix = 624; prefix <= 626; prefix++) {
+    for (let length = 16; length <= 19; length++) {
+      it(`has a prefix of ${prefix} and a length of ${length}`, function() {
+        const cardNumber = prefix.toString().padEnd(length, '1234567890');
+        detectNetwork(cardNumber).should.equal('China UnionPay');
+      });
+    }
+  }
+
+  for (let prefix = 6282; prefix <= 6288; prefix++) {
+    for (let length = 16; length <= 19; length++) {
+      it(`has a prefix of ${prefix} and a length of ${length}`, function() {
+        const cardNumber = prefix.toString().padEnd(length, '1234567890');
+        detectNetwork(cardNumber).should.equal('China UnionPay');
+      });
+    }
+  }
+
+  for (let prefix = 622126; prefix <= 622925; prefix++) {
+    for (let length = 16; length <= 19; length++) {
+      it(`has a prefix of ${prefix} and a length of ${length}`, function() {
+        const cardNumber = prefix.toString().padEnd(length, '1234567890');
+        detectNetwork(cardNumber).should.equal('China UnionPay');
+      });
+    }
+  }
+});
+
 describe('should support Switch')
