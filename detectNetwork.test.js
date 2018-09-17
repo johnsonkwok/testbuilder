@@ -109,8 +109,6 @@ describe('Discover', function() {
       it(`has a prefix of ${prefix} and a length of 16`, function() {
         assert(detectNetwork(`${prefix}1123456789012`) === 'Discover');
       });
-    })(prefix);
-    (function(prefix) {
       it(`has a prefix of ${prefix} and a length of 19`, function() {
         assert(detectNetwork(`${prefix}1123456789012345`) === 'Discover');
       });
@@ -124,12 +122,10 @@ describe('Maestro', function() {
 
   for (let length = 12; length <= 19; length++) {
     prefixes.forEach((prefix) => {
-      (function(prefix) {
         it(`has a prefix of ${prefix} and a length of ${length}`, function() {
           const cardNumber = prefix.padEnd(length, '1234567890');
           detectNetwork(cardNumber).should.equal('Maestro');
         });
-      })(prefix);
     });
   }
 });
@@ -165,4 +161,17 @@ describe('China UnionPay', function() {
   }
 });
 
-describe('should support Switch')
+describe('Switch', function() {
+  let should = chai.should;
+  const prefixes = [4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759];
+  const lengths = [16, 18, 19];
+
+  for (let i = 0; i < lengths.length; i++) {
+    prefixes.forEach((prefix) => {
+      it(`has a prefix of ${prefix} and a length of ${lengths[i]}`, function() {
+        const cardNumber = prefix.toString().padEnd(lengths[i], '1234567890');
+        detectNetwork(cardNumber).should.equal('Switch');
+      });
+    });
+  }
+});
